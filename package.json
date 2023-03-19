@@ -1,0 +1,52 @@
+{
+  "name": "fitnesstrac.kr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "react-scripts start",
+    "seed": "npm run seed:dev",
+    "seed:test": "npm run test:watch db",
+    "start:api": "npm run start:dev",
+    "test:api": "npm run test:watch api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2301-PES/FitnessTrac.kr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2301-PES/FitnessTrac.kr/issues"
+  },
+  "homepage": "/",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.9.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

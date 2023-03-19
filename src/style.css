@@ -1,0 +1,42 @@
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   }
+
+header{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    border-bottom: 2px solid black;
+}
+
+/* #fitnessTrackerHeader{
+} */
+
+#headerButtonGroup{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 30%;
+}
+
+/* .singlePost{
+    border: 2px solid black;
+}
+
+.postName{
+    font-size: x-large;
+    color: brown;
+}
+
+.postTitle{
+    font-size: xx-large;
+    color: brown;
+}
+
+.description{
+    color: blue;
+}
+
+.individualMessage{
+    border: 2px solid blue;
+} */
