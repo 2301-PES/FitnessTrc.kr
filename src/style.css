@@ -1,42 +1,127 @@
 * {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   }
-
-header{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    border-bottom: 2px solid black;
 }
 
-/* #fitnessTrackerHeader{
-} */
+html {
+    background-image: url(../public/background.jpg);
+    background-color: #333;
+}
+  
+/* header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 1px solid #9ca39c;
+}
+
+#headerLogo{
+    width: 105px;
+    height: 105px;
+}
 
 #headerButtonGroup{
     display: flex;
+    gap: 1%;
     align-items: center;
-    justify-content: space-evenly;
-    width: 30%;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    width: 50%;
+    justify-content: right;
+}
+  
+.headerButton {
+    text-align: center;
+    background-color: #555;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    max-width: 50%;
+    min-width: 50px;
+}
+  
+.headerButton:hover {
+    background-color: #777;
+}
+  
+#headerButtonGroup a {
+    color: #333;
+    background-color: #9ca39c;
+    transition: background-color 0.3s ease;
+}
+  
+#headerButtonGroup a:hover {
+    background-color: #ccc;
+}
+  
+/* body styling */
+body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* .singlePost{
-    border: 2px solid black;
+/* homepage styling */
+#home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
 
-.postName{
-    font-size: x-large;
-    color: brown;
+#homeContent {
+    width: 50%;
+    background-color: #9ca39c;
+    border-radius: 5%;
+    font-size: 1.25rem;
+    text-align: center;
+    
 }
 
-.postTitle{
-    font-size: xx-large;
-    color: brown;
+#loginHyperlink{
+    background-color: #9ca39c;
+    font-size: 2rem;
 }
+  
+/* Media query for smaller screens */
+@media (max-width: 480px) {
 
-.description{
-    color: blue;
-}
+    /* universal styling */
+    html {
+        background-size: 25% auto;
+    }    
+    /* header styling */
+    header {
+        border-bottom: 0px;
+    }
 
-.individualMessage{
-    border: 2px solid blue;
-} */
+    #headerLogo{
+        width: 50%;
+        height: 50%;
+    }
+
+    #headerButtonGroup {
+        flex-direction: column;
+        align-items: center;
+    }
+  
+    .headerButton {
+        margin: 10px 0;
+        width: 50%;
+        max-width: 280px;
+        flex-basis: auto;
+    }
+    /* home styling */
+    #homeContent {
+        font-size: .6rem;    
+    }
+
+    #loginHyperlink{
+        font-size: 1rem;
+    }
+  }
