@@ -33,8 +33,14 @@ const AllRoutines = (props) => {
                 return (
                     <div className="routines" key={routine.id}>
                         <p className="routineName">Name: {routine.name}</p>
-                        <p className="routineDescription">Description: {routine.description}</p>
-                        <p className="routineDuration">Duration: {routine.duration}</p>
+                        <p className="routineDescription">Goal: {routine.goal}</p>
+                        <p className="routineDescription">Creator Name: {routine.creatorName}</p>
+                        <div className="activitiesInRoutineList">List of activities: {routine.activities.map((activity) => {
+                            return (
+                            <div className="routines" key={activity.id}>
+                                <p className="activityInRoutine"> Activity name: {activity.name} </p>
+                            </div>)
+                        })}</div>
                         <p className="routineCount">Count: {routine.count}</p>
                         <Link className="routineLink" to={`/${routine.id}`}>Open this routine</Link>
                     </div>

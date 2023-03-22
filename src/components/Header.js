@@ -7,13 +7,10 @@ const Header = (props) => {
     const navigate = useNavigate();
 
 
-    const handleLogout = () => {
+    const handleLogout = (event) => {
+        event.preventDefault();
         localStorage.removeItem('token');
         props.setIsLoggedIn(false);
-        navigate('/');
-    }
-    function notLoggedIn(){
-        alert("Please log in to see this!");
         navigate('/');
     }
 
