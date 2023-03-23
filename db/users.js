@@ -50,11 +50,42 @@ async function getUser({ username, password }) {
 }
 
 async function getUserById(userId) {
+    try {
+
+        const {rows: [user] } = client.query(`
+            SELECT id, username FROM users
+            WHERE id=$1;
+        `,[userId]);
+
+        if (!user) {
+            return null
+        }
+
+        return user;
+
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 
 async function getUserByUsername(userName) {
+    try {
+        const {rows} = client.query(`
+            SELECT id, username 
+            FROM users
+            WHERE username=$1;
+        `, [userName])
 
+        if(user.length){
+            return rows[0];
+        }
+        else{
+            return undefined;
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = {
