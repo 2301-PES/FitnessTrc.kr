@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "react-scripts start",
-    "seed": "npm run seed:dev",
+    "seed": "node ./db/seed.js",
+    "seed:dev": "nodemon ./db/seed.js",
     "seed:test": "npm run test:watch db",
     "start:api": "npm run start:dev",
     "test:api": "npm run test:watch api"

@@ -1,11 +1,11 @@
-const client = require('./client');
+const {client} = require('./client');
 
 // database functions
 async function createActivity({ name, description }) {
     try {
         const {rows} = await client.query(`
             INSERT INTO activities(name,description)
-            VALUES($1,$2)
+            VALUES ($1,$2)
             RETURNING *;
         `,[name,description]);
 
@@ -21,7 +21,7 @@ async function createActivity({ name, description }) {
 async function getAllActivities() {
   // select and return an array of all activities
   try {
-    const {rows} = client.query(`
+    const {rows} = await client.query(`
         SELECT * from activities;
     `)
     return rows;
@@ -32,7 +32,7 @@ async function getAllActivities() {
 
 async function getActivityById(id) {
     try {
-        const {rows: [activity]} = client.query(`
+        const {rows: [activity]} = await client.query(`
             SELECT * 
             FROM activities
             WHERE id=$1;
@@ -46,7 +46,7 @@ async function getActivityById(id) {
 
 async function getActivityByName(name) {
     try {
-        const {rows: [activity]} = client.query(`
+        const {rows: [activity]} = await client.query(`
             SELECT *
             FROM activities
             WHERE name=$1;
