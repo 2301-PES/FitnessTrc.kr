@@ -14,7 +14,6 @@ const Header = (props) => {
 
     return(
         <header>
-            {/* <h1 id="fitnessTrackerHeader">Fitness Tracker</h1> */}
             <img id="headerLogo" src="/logo.jpg" alt="Fitness Tracker logos"/>
                     <div id="headerButtonGroup">   
                         <Link to='/' className="headerButton"> Home </Link>
