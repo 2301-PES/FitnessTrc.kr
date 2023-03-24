@@ -1,11 +1,21 @@
-const client = require("./client");
+const {client} = require("./client");
 
 async function addActivityToRoutine({
   routineId,
   activityId,
-  count,
   duration,
+  count,
 }) {
+    try {
+        const {rows} = await client.query(`
+            INSERT INTO "RoutineActivities"("routineId","activityId", duration, count)
+            VALUES ($1,$2,$3,$4)
+            RETURNING *;
+        `, [routineId, activityId, duration, count]);
+        return rows;
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 
@@ -26,7 +36,7 @@ async function destroyRoutineActivity(id) {
 }
 
 async function canEditRoutineActivity(routineActivityId, userId) {
-    
+
 }
 
 module.exports = {
