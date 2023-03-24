@@ -4,25 +4,28 @@ const allRoutines = async () => {
 
     
 
-    try {
-        const response = await fetch(`${BASE_URL}/routines`, {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        const result = await response.json();
-        return result 
+    
 
     useEffect(() => {
+        async function fetchMyData() {
 
-    }, []
-
-    } catch (e) {
-        console.log(e);
+        try {
+            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+    
+            const result = await response.json();
+            return result 
+        } catch (e) {
+            console.log(e);
+        }
     }
+    }, [])
+    
     return (
-
+        <div>Placeholder on Routines</div>
     )
 }
 
