@@ -2,6 +2,7 @@ const {client} = require("./client");
 const {
     getActivityById,
     getAllActivities,
+    attachActivitiesToRoutines,
 
 } = require("./activities")
 
@@ -23,7 +24,7 @@ async function createRoutine({ creatorId, isPublic, name, goal }) {
 
 async function getRoutineById(id) {
     try {
-        const {rows: [routine]} = client.query(`
+        const {rows: [routine]} = await client.query(`
             SELECT *
             FROM routines
             WHERE id=$1;
@@ -53,13 +54,14 @@ async function getRoutinesWithoutActivities() {
 async function getAllRoutines() {
 
     try {
-        // const{rows} = client.query(`
-        //     SELECT * 
-        //     FROM routines 
-        //     JOIN activities 
-        //     ON "creatorId" =activities.id;
-        // `);
-        // return rows;
+        const{rows} = client.query(`
+            SELECT * 
+            FROM routines; 
+        `);
+
+        
+        let allroutines = await attachActivitiesToRoutines(rows);
+        return allroutines;
     } catch (error) {
         console.log(error);
     }
@@ -67,14 +69,13 @@ async function getAllRoutines() {
 
 async function getAllPublicRoutines() {
     try {
-        // const{rows} = client.query(`
-        //     SELECT * 
-        //     FROM routines 
-        //     JOIN activities 
-        //     ON "creatorId" =activities.id;
-        //     WHERE "isPublic"=true;
-        // `);
-        // return rows;  
+        const{rows} = client.query(`
+            SELECT * 
+            FROM routines 
+            WHERE "isPublic"=true;
+        `);
+        let allRoutines = await attachActivitiesToRoutines(rows);
+        return allRoutines;  
     } catch (error) {
         console.log(error);
     }

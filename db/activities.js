@@ -60,7 +60,28 @@ async function getActivityByName(name) {
 }
 
 // used as a helper inside db/routines.js
-async function attachActivitiesToRoutines(routines) {}
+async function attachActivitiesToRoutines(routines) {
+    try {
+        const {rows} = await client.query(`
+            SELECT * from activities
+            JOIN "RoutineActivities"
+            ON activities.id = "RoutineActivities"."activityId";
+        `);
+        for(let i=0; i<routines.length; i++){
+            let answer = rows.filter((singleActivity)=>{
+                if(singleActivity.routineId == routines[i].id){
+                    return true;
+                }else{
+                    return false;
+                }
+            })
+            routines[i].activities = answer;
+        }
+        return routines;
+    } catch (error) {
+        console.log(error);
+    }
+}
 //ignore for now
 //maybe implement later
 
@@ -96,7 +117,7 @@ module.exports = {
   getAllActivities,
   getActivityById,
   getActivityByName,
-//   attachActivitiesToRoutines,
+  attachActivitiesToRoutines,
   createActivity,
   updateActivity,
 };

@@ -72,13 +72,14 @@ async function getUserById(userId) {
 
 async function getUserByUsername(userName) {
     try {
-        const {rows} = client.query(`
-            SELECT id, username 
+        const {rows} = await client.query(`
+            SELECT id, username, password 
             FROM users
             WHERE username=$1;
         `, [userName])
 
-        if(user.length){
+        // console.log(rows);
+        if(rows){
             return rows[0];
         }
         else{
