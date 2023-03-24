@@ -15,8 +15,8 @@ const allRoutines = async () => {
         return result 
 
     useEffect(() => {
-        
-    })
+
+    }, []
 
     } catch (e) {
         console.log(e);
