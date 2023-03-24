@@ -18,7 +18,6 @@ const AllRoutines = (props) => {
             });
             const result = await response.json();
             const desiredResult = result.filter(routine => routine.isPublic);
-            console.log()
             setAllRoutines(desiredResult);
         } catch (e) {
             console.log(e);
@@ -32,12 +31,12 @@ const AllRoutines = (props) => {
             {
             allRoutines.length ? allRoutines.map((routine) => {            
                 return (
-                    <div className="routines" key={routine._id}>
+                    <div className="routines" key={routine.id}>
                         <p className="routineName">Name: {routine.name}</p>
                         <p className="routineDescription">Description: {routine.description}</p>
                         <p className="routineDuration">Duration: {routine.duration}</p>
                         <p className="routineCount">Count: {routine.count}</p>
-                        <Link to={`/${routine._id}`}>Open this routine</Link>
+                        <Link to={`/${routine.id}`}>Open this routine</Link>
                     </div>
                 )
             }) : "No data available" 
