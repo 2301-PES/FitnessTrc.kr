@@ -10,7 +10,7 @@ const Header = (props) => {
         localStorage.removeItem('token');
         props.setIsLoggedIn(false);
         navigate('./');
-      }
+    }
 
     return(
         <header>
