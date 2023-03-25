@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 
 //function imports;
 const{ getUserByUsername, createUser } = require('../db/users');
+const{ getAllRoutinesByUser, getPublicRoutinesByUser } = require('../db/routines') 
 const { requireUser } = require('./utils');
 
 
@@ -121,11 +122,54 @@ usersRouter.post('/register', async (req,res,next)=>{
 usersRouter.get('/me', requireUser, async(req,res,next)=>{
     try {
         const user = req.user;
+        if (user){
+            res.send({
+                id: user.id,
+                username: user.username
+            });
+        } else{
+            res.send({
+                success: false,
+                error: {
+                    name: 'user not found',
+                    message: 'this user was not found in the system'
+                },
+                data: null
+            })
+        }
     } catch (error) {
-        
+        console.log(error);
+        next(error);
     }
 
-
 })
+
+//
+
+usersRouter.get('/:username/routines', async (req, res, next) => {
+    const { username } = req.params
+    try {
+      const userToken = req.headers.authorization.split(" ")[1];
+      const decryptedUserToken = jwt.verify(userToken, process.env.JWT_SECRET);
+      if (decryptedUserToken.username && username == decryptedUserToken.username){
+        const retrieveRoutines = await getAllRoutinesByUser(username);
+        res.send(retrieveRoutines)
+      } else if (decryptedUserToken.username && username != decryptedUserToken.username) {
+        const retrieveRoutines = await getPublicRoutinesByUser(username);
+        res.send(retrieveRoutines)
+      } else {
+        res.send({
+            name: 'user not valid',
+            message: 'Cannot get routines. User is not valid'
+        })
+      }
+     
+    } catch({name, message}) {
+      next({
+          name,
+          message
+      })
+    }
+  });
 
 module.exports = usersRouter
