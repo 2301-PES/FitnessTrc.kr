@@ -20,7 +20,7 @@ apiRouter.use(async(req,res,next)=>{
             console.log("top of the try block");
             const jwtId = jwt.verify(token, JWT_SECRET);
             const {username} = jwtId;
-            console.log(jwtId);
+            // console.log(jwtId);
             console.log("username: " +username);
             if(username){
                 console.log("top of the if statement in the try block");

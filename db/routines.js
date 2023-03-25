@@ -84,12 +84,15 @@ async function getAllPublicRoutines() {
 
 async function getAllRoutinesByUser({ username }) {
     try {
-        const user = await getUserByUsername(username)
+
+        console.log("This is our username in getAllRoutines"+username);
+        const user = await getUserByUsername(username);
+        console.log(user);
         const { rows } = await client.query(`
         SELECT * 
         FROM routines 
-        WHERE "creatorId"=${ user.id };
-      `);
+        WHERE "creatorId"=$1;
+      `,[user.id]);
         let allUserRoutines = await attachActivitiesToRoutines(rows);
         return allUserRoutines;
     } catch (error) {
@@ -100,13 +103,16 @@ async function getAllRoutinesByUser({ username }) {
 
 async function getPublicRoutinesByUser({ username }) {
     try {
+        console.log("This is our username in getAllPublicRoutines"+username);
+
         const user = await getUserByUsername(username)
+        console.log(user);
         const { rows } = await client.query(`
         SELECT * 
         FROM routines 
-        WHERE "creatorId"=${ user.id }
+        WHERE "creatorId"=$1
         AND "isPublic"=true;
-      `);
+      `,[user.id]);
         let allUserRoutines = await attachActivitiesToRoutines(rows);
         return allUserRoutines;
     } catch (error) {

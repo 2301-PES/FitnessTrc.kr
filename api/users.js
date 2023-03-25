@@ -148,14 +148,17 @@ usersRouter.get('/me', requireUser, async(req,res,next)=>{
 
 usersRouter.get('/:username/routines', async (req, res, next) => {
     const { username } = req.params
+    const user = req.user;
+    console.log("This is the/username/routines route handler");
+    console.log(user);
     try {
       const userToken = req.headers.authorization.split(" ")[1];
       const decryptedUserToken = jwt.verify(userToken, process.env.JWT_SECRET);
-      if (decryptedUserToken.username && username == decryptedUserToken.username){
-        const retrieveRoutines = await getAllRoutinesByUser(username);
+      if (decryptedUserToken.username && user.username == decryptedUserToken.username){
+        const retrieveRoutines = await getAllRoutinesByUser(user);
         res.send(retrieveRoutines)
-      } else if (decryptedUserToken.username && username != decryptedUserToken.username) {
-        const retrieveRoutines = await getPublicRoutinesByUser(username);
+      } else if (decryptedUserToken.username && user.username != decryptedUserToken.username) {
+        const retrieveRoutines = await getPublicRoutinesByUser(user);
         res.send(retrieveRoutines)
       } else {
         res.send({
