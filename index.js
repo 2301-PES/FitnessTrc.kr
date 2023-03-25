@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const server = express();
+const cors = require('cors');
 const morgan = require('morgan');
 
 const {client} = require('./db/client');
@@ -8,6 +9,7 @@ const {client} = require('./db/client');
 server.use(morgan('dev'));
 
 server.use(express.json());
+server.use(cors());
 
 server.use((req, res, next) => {
     console.log("<____Body Logger START____>");

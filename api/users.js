@@ -40,6 +40,7 @@ usersRouter.post('/login', async (req,res,next)=>{
                     const token = await jwt.sign({username, password}, process.env.JWT_SECRET);
                     res.send(
                         {
+                            success:true,
                             user: 
                             {
                                 userId,
@@ -49,7 +50,7 @@ usersRouter.post('/login', async (req,res,next)=>{
                             token: token
                         }).status(200);
                 } else {
-                    res.send({message: "begone hacker!"}).status(403)
+                    res.send({message: "Wrong password!"}).status(403)
                 }
             } else {
                 res.send(
