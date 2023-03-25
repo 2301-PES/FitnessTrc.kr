@@ -7,6 +7,7 @@ const Login = () => {
     const [newPassword, setNewPassword] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    // "https://fitnesstrac-kr.herokuapp.com/api/users/login"
 
     const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await fetch(
-                "https://fitnesstrac-kr.herokuapp.com/api/users/login",
+                "http://localhost:1337/api/users/login",
                 {
                     method: "POST",
                     headers: {
@@ -33,6 +34,7 @@ const Login = () => {
             const translatedData = await response.json();
 
             if (!translatedData.success) {
+                console.log(translatedData);
                 alert('Login failed.');
             } else {
                 const myJWT = translatedData.token;
@@ -57,7 +59,7 @@ const Login = () => {
                 return;
             }
 
-            const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/users/register',
+            const response = await fetch('http://localhost:1337/api/users/register',
                 { 
                     method: 'POST',
                     headers: {
