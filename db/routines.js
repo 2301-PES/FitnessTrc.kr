@@ -125,12 +125,41 @@ async function getPublicRoutinesByUser({ username }) {
 
 // }
 
-async function updateRoutine({ id, ...fields }) {
+async function updateRoutine({ id, fields = {} }) {
+    const setString = Object.keys(fields).map(
+        (key, index) => `"${ key }"=$${ index + 1 }`
+    ).join(', ');
 
+    try {
+        if (setString.length) { await client.query(`
+        UPDATE routines
+        SET ${ setString }
+        WHERE id=${ id }
+        RETURNING *;
+    `, Object.values(fields));
+    }
+        return await getRoutineById(id);
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function destroyRoutine(id) {
+    try{
+        const routineToDelete= await getRoutineById(id)
 
+        await client.query(`
+            DELETE FROM routines
+            WHERE id = $1;
+        `, [id]);
+
+        return routineToDelete;
+
+    } catch(error){
+        console.error(error);
+        throw error;
+    }
 }
 
 module.exports = {
