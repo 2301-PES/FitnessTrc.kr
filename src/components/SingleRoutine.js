@@ -10,7 +10,8 @@ const SingleRoutine = (props) => {
     useEffect(() => {
         async function fetchCurrentRoutine() {
             try {
-                const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
+                const response = await fetch(`http://localhost:1337/api/routines`,{
+                // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -27,7 +28,8 @@ const SingleRoutine = (props) => {
         
         async function fetchActivities() {
             try {
-              const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/activities`, {
+                const response = await fetch(`http://localhost:1337/api/activities`,{
+            //   const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/activities`, {
                 headers: {
                   'Content-Type': 'application/json',
                 }
@@ -59,7 +61,8 @@ const SingleRoutine = (props) => {
 
         async function fetchMyData() {
             try {
-                const response = await fetch("https://fitnesstrac-kr.herokuapp.com/api/users/me", {
+                const response = await fetch(`http://localhost:1337/api/users/me`,{
+                // const response = await fetch("https://fitnesstrac-kr.herokuapp.com/api/users/me", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -84,7 +87,8 @@ const SingleRoutine = (props) => {
 
         try {
             const response = await fetch(
-                `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}`,
+                `http://localhost:1337/api/routines/${id}`,
+                // `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -123,7 +127,8 @@ const SingleRoutine = (props) => {
 
         try {
             const response = await fetch(
-                `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}/activities`,
+                `http://localhost:1337/api/routines/${id}/activities`,
+                // `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}/activities`,
                 {
                     method: "POST",
                     headers: {

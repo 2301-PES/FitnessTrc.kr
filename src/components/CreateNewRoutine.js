@@ -12,7 +12,8 @@ const CreateNewRoutine = () => {
         e.preventDefault();
         try {
 
-            const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/routines',
+            const response = await fetch (`http://localhost:1337/api/routines`,
+            // const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/routines',
                 { 
                     method: 'POST',
                     headers: {
