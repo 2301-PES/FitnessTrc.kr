@@ -9,6 +9,7 @@ const {
     getActivityByName
 } = require('../db');
 
+//stretch goal
 activitiesRouter.get('/:activityId/routines', async (req, res, next) => {
     const activities = await getActivityById(req.params.activityId);
     if(!req.params.activityId){
@@ -24,6 +25,7 @@ activitiesRouter.get('/:activityId/routines', async (req, res, next) => {
         next(error);
     }
 });
+//end of stretch goal
 
 activitiesRouter.get('/', async (req, res) => {
     try {
@@ -68,6 +70,7 @@ activitiesRouter.post('/', async (req, res, next) => {
 activitiesRouter.patch('/:activityId', async (req, res, next) => {
     const id = req.params.activityId;
     const { name, description  } = req.body;
+    console.log(id);
 
     const updateFields = {};
 
@@ -78,7 +81,9 @@ activitiesRouter.patch('/:activityId', async (req, res, next) => {
         updateFields.description = description;
     }
     try {
+        console.log(updateFields);
         const updatedActivity = await updateActivity({id, fields: updateFields});
+        console.log("done");
         res.send(updatedActivity);
     } catch ({ name, message }) {
         next({ name, message });
