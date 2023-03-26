@@ -39,7 +39,7 @@ const AllActivities = (props) => {
                     <div className="activities" key={activity.id}>
                         <p className="activityName">Name: {activity.name}</p>
                         <p className="activityDescription">Description: {activity.description}</p>
-                        <Link to={`/${activity.id}`}>Open this Activity</Link>
+                        <Link className="activityLink" to={`/${activity.id}`}>Open this Activity</Link>
                     </div>
                 )
             }) : "No data available" 
