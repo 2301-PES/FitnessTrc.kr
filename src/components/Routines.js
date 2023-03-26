@@ -11,7 +11,8 @@ const AllRoutines = (props) => {
         
         
         try {
-            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
+            const response = await fetch (`http://localhost:1337/api/routines`,{
+            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
