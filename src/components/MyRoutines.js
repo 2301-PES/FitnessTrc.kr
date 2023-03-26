@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const MyRoutines = (props) => {
-    // const { routines, setRoutines, fetchRoutines } = props;
+    
     const { IsPublic, setIsPublic } = useState(false);
     const { routineName, setRoutineName } = useState("");
     const { routineGoal, setRoutineGoal } = useState("");
     const [myRoutines, setMyRoutines] = useState([]);
     const [myId, setMyId] = useState(null);
-
-    function toggleCreate() {
-        setCreateStatus(!createStatus)
-    };
 
     const navigate = useNavigate();
 
@@ -19,17 +15,15 @@ const MyRoutines = (props) => {
         if (localStorage.getItem("token")) {
             props.setIsLoggedIn(true);
             fetchMyUserData();
-            fetchMyRoutines(myId);
         } else {
             props.setIsLoggedIn(false);
             console.log("No token exist");
         }
     }, []);
 
-    // const fetchMyUserData = async (event) => {
+    
     const fetchMyUserData = async () => {
-        // event.preventDefault();
-
+        
         const tokenKey = localStorage.getItem("token");
 
         try {
@@ -37,51 +31,77 @@ const MyRoutines = (props) => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${tokenKey}`
-                    // Authorization:  `Bearer ${localStorage.getItem('token')}`
                   },
                 });
-                // console.log(tokenKey);
                 const result = await response.json();
-                console.log(result);
+                console.log("this is line 41 result:  " +JSON.stringify(result));
                 setMyId(result.id);
                 fetchMyRoutines(result.id);
-                console.log(result.id);
 
-                // return result
         }catch(error){
             console.log(error);
         }
     }
+
+
     async function fetchMyRoutines(id) {
-        
-        
         try {
-            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            const result = await response.json();
-            const desiredResult = result.filter(routine => routine.id ==id );
-            setMyRoutines(desiredResult);
+          const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/${id}/routines`, {
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+          const result = await response.json();
+          setMyRoutines(result);
         } catch (e) {
-            console.log(e);
+          console.log(e);
+        }
+      }
+      
+
+
+    async function deleteRoutine(event) {
+        try {
+            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines/${event.target.value}`,
+            {
+                method: "DELETE",
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+
+            const translatedResponse = await response.json();
+
+            console.log(translatedResponse)
+
+            if (translatedResponse.success) {
+                let filteredMyRoutines = myRoutines.filter((individualRoutine) => {
+                    if (individualRoutine.id != event.target.value) {
+                        return individualRoutine
+                    }
+                })
+
+                myRoutines = filteredMyRoutines
+            }
+        
+        } catch (error) {
+            console.log(error);
         }
     }
 
-
-
     return (
         <div>
-            <div>
-
-            </div>
+            <Link to='/createnewroutine'>Click here to create a new routine</Link>
             <div>
                 {
-                    !myRoutines.length ?<div>No routines dumbass</div> : myRoutines.map((singleRoutine,index)=>{
+                    !myRoutines.length ?<div>No routines yet. Please create a routine</div> : myRoutines.map((singleRoutine,index)=>{
                         return(
                             <div key={index +1}>
                                 <p>{index+1}. {singleRoutine.name}</p>
+                                <p>{singleRoutine.creatorName}</p>
+                                <p>{singleRoutine.goal}</p>
+                                <button value={singleRoutine.id} onClick={deleteRoutine} type='submit' > Delete this routine</button>
                             </div>
                         )
                     })

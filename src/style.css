@@ -135,6 +135,61 @@ body {
     width: fit-content;
     background-color: #9ca39c;
 }
+
+/* activities styling */
+.activities {
+    display: flexbox;
+    background-color: #9ca39c;
+    border-radius: 10px;
+    margin: 2%;
+    padding: 1.6%;
+    height: auto;
+}
+.activityName {
+    display: flexbox;
+    background-color: #ccc;
+}
+.activityDescription {
+    display: flexbox;
+    width: auto;
+    justify-content: left;
+}
+.activityLink {
+    display: flexbox;
+    -webkit-text-fill-color: white;
+    text-decoration-line: none;
+}
+
+/* routines styling */
+.routines {
+    display: flexbox;
+    background-color: #9ca39c;
+    border-radius: 10px;
+    margin: 2%;
+    padding: 1.6%;
+    height: auto;
+}
+
+.routineName {
+    display:flexbox;
+    background-color: #ccc;
+}
+
+.routineLink {
+    display: flexbox;
+    -webkit-text-fill-color: blue;
+    text-decoration-line: none;
+}
+
+.activitiesInRoutineList {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.activityInRoutine {
+    margin-top: 0;
+    margin-bottom: 0;
+}
     
 /* Media query for smaller screens */
 @media (max-width: 480px) {
@@ -173,48 +228,5 @@ body {
     #loginHyperlink{
         font-size: 1rem;
     }
-  }
-
-
-.activities {
-    display: flexbox;
-    background-color: #9ca39c;
-    border-radius: 10px;
-    margin: 2%;
-    padding: 1.6%;
-    height: auto;
-}
-.activityName {
-    display: flexbox;
-    background-color: #ccc;
-}
-.activityDescription {
-    display: flexbox;
-    width: auto;
-    justify-content: left;
-}
-.activityLink {
-    display: flexbox;
-    -webkit-text-fill-color: white;
-    text-decoration-line: none;
 }
 
-
-.routines {
-    display: flexbox;
-    background-color: #9ca39c;
-    border-radius: 10px;
-    margin: 2%;
-    padding: 1.6%;
-    height: auto;
-}
-
-.routineName {
-    display:flexbox;
-    background-color: #ccc;
-}
-.routineLink {
-    display: flexbox;
-    -webkit-text-fill-color: white;
-    text-decoration-line: none;
-}
