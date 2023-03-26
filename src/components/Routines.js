@@ -36,7 +36,7 @@ const AllRoutines = (props) => {
                         <p className="routineDescription">Description: {routine.description}</p>
                         <p className="routineDuration">Duration: {routine.duration}</p>
                         <p className="routineCount">Count: {routine.count}</p>
-                        <Link to={`/${routine.id}`}>Open this routine</Link>
+                        <Link className="routineLink" to={`/${routine.id}`}>Open this routine</Link>
                     </div>
                 )
             }) : "No data available" 
