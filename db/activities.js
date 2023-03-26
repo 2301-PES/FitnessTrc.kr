@@ -59,7 +59,6 @@ async function getActivityByName(name) {
     }
 }
 
-// used as a helper inside db/routines.js
 async function attachActivitiesToRoutines(routines) {
     try {
         const {rows} = await client.query(`
