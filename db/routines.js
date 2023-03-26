@@ -120,9 +120,10 @@ async function getPublicRoutinesByUser({ username }) {
     }
 }
 
-async function getPublicRoutinesByActivity({ id }) {
+//stretch goal
+// async function getPublicRoutinesByActivity({ id }) {
 
-}
+// }
 
 async function updateRoutine({ id, ...fields }) {
 
@@ -139,7 +140,7 @@ module.exports = {
   getAllPublicRoutines,
   getAllRoutinesByUser,
   getPublicRoutinesByUser,
-  getPublicRoutinesByActivity,
+//   getPublicRoutinesByActivity,
   createRoutine,
   updateRoutine,
   destroyRoutine,
