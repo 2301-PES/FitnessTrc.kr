@@ -84,7 +84,7 @@ async function attachActivitiesToRoutines(routines) {
 //ignore for now
 //maybe implement later
 
-async function updateActivity({ id, ...fields }) {
+async function updateActivity({ id, fields= {} }) {
   // don't try to update the id
   // do update the name and description
   // return the updated activity
