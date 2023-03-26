@@ -61,11 +61,14 @@ async function getActivityByName(name) {
 
 async function attachActivitiesToRoutines(routines) {
     try {
+        console.log(routines)
         const {rows} = await client.query(`
             SELECT * from activities
             JOIN "RoutineActivities"
             ON activities.id = "RoutineActivities"."activityId";
         `);
+        console.log("This is routines in attachActivitiesToRoutines function");
+        console.log(routines)
         for(let i=0; i<routines.length; i++){
             let answer = rows.filter((singleActivity)=>{
                 if(singleActivity.routineId == routines[i].id){

@@ -6,6 +6,7 @@ const {
 
 } = require("./activities");
 const { getUserByUsername } = require("./users");
+const { destroyRoutineActivity, destroyRoutineActivityByRoutineId } = require("./routine_activities");
 
 async function createRoutine({ creatorId, isPublic, name, goal }) {
     try {
@@ -25,12 +26,15 @@ async function createRoutine({ creatorId, isPublic, name, goal }) {
 
 async function getRoutineById(id) {
     try {
+        console.log("start of getRoutineById");
+        console.log(id);
         const {rows: [routine]} = await client.query(`
             SELECT *
             FROM routines
             WHERE id=$1;
         `,[id]);
 
+        // return rows;
         return routine;
         
     } catch (error) {
@@ -55,12 +59,10 @@ async function getRoutinesWithoutActivities() {
 async function getAllRoutines() {
 
     try {
-        const{rows} = client.query(`
+        const{rows} = await client.query(`
             SELECT * 
             FROM routines; 
         `);
-
-        
         let allroutines = await attachActivitiesToRoutines(rows);
         return allroutines;
     } catch (error) {
@@ -70,13 +72,16 @@ async function getAllRoutines() {
 
 async function getAllPublicRoutines() {
     try {
-        const{rows} = client.query(`
+        console.log("Start of the getAllPublicRoutines DB function");
+        const{rows} = await client.query(`
             SELECT * 
             FROM routines 
             WHERE "isPublic"=true;
         `);
+
         let allRoutines = await attachActivitiesToRoutines(rows);
         return allRoutines;  
+        // return rows;
     } catch (error) {
         console.log(error);
     }
@@ -147,13 +152,18 @@ async function updateRoutine({ id, fields = {} }) {
 
 async function destroyRoutine(id) {
     try{
-        const routineToDelete= await getRoutineById(id)
-
+        console.log("start of destroy routines. the ID is: ");
+        console.log(id);
+        const routineToDelete= await getRoutineById(id);
+        console.log("routineToDelete: ");
+        console.log(routineToDelete)
+        await destroyRoutineActivityByRoutineId(id);
         await client.query(`
             DELETE FROM routines
-            WHERE id = $1;
+            WHERE id=$1;
         `, [id]);
 
+       
         return routineToDelete;
 
     } catch(error){
