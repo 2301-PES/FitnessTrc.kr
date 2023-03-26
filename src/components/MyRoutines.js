@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const MyRoutines = (props) => {
     // const { routines, setRoutines, fetchRoutines } = props;
-    const { createStatus, setCreateStatus } = useState(false);
-    const { createName, setCreateName } = useState("");
-    const { createGoal, setCreateGoal } = useState("");
+    const { IsPublic, setIsPublic } = useState(false);
+    const { routineName, setRoutineName } = useState("");
+    const { routineGoal, setRoutineGoal } = useState("");
     const [myRoutines, setMyRoutines] = useState([]);
     const [myId, setMyId] = useState(null);
 
@@ -73,15 +73,20 @@ const MyRoutines = (props) => {
 
     return (
         <div>
-            {
-                !myRoutines.length ?<div>No routines dumbass</div> : myRoutines.map((singleRoutine,index)=>{
-                    return(
-                        <div key={index +1}>
-                            <p>{index+1}. {singleRoutine.name}</p>
-                        </div>
-                    )
-                })
-            }
+            <div>
+
+            </div>
+            <div>
+                {
+                    !myRoutines.length ?<div>No routines dumbass</div> : myRoutines.map((singleRoutine,index)=>{
+                        return(
+                            <div key={index +1}>
+                                <p>{index+1}. {singleRoutine.name}</p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
