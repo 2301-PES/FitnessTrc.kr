@@ -1,6 +1,8 @@
 const express = require('express');
 const activitiesRouter = express.Router();
 
+const {requireUser} = require('./utils');
+
 const { 
     createActivity,
     getAllActivities,
@@ -57,37 +59,50 @@ activitiesRouter.post('/', async (req, res, next) => {
             name,
             description
         });
+        
 
-        res.send({
-            message: "Activity Successfully Created",
-            createdActivity
-        });
+        res.send(
+           createdActivity
+        );
     } catch ({ name, message }) {
         next({ name, message })
     } 
 });
 
-activitiesRouter.patch('/:activityId', async (req, res, next) => {
+activitiesRouter.patch('/:activityId', requireUser,async (req, res, next) => {
     const id = req.params.activityId;
     const { name, description  } = req.body;
     console.log(id);
+    const user = req.user;
+    if(user){
+        const updateFields = {};
 
-    const updateFields = {};
+        if (name) {
+            updateFields.name = name;
+        }
+        if (description) {
+            updateFields.description = description;
+        }
+        try {
+            console.log(updateFields);
+            const updatedActivity = await updateActivity({id, fields: updateFields});
+            console.log("done");
+            res.send(updatedActivity);
+        } catch ({ name, message }) {
+            next({ name, message });
+        }
+    }else{
+        res.send({
+            success : false,
+            error : {
+                name: 'WrongUser',
+                message : 'You need to be logged in to update this activity'
+            },
+            data : null
+        })
+    }
 
-    if (name) {
-        updateFields.name = name;
-    }
-    if (description) {
-        updateFields.description = description;
-    }
-    try {
-        console.log(updateFields);
-        const updatedActivity = await updateActivity({id, fields: updateFields});
-        console.log("done");
-        res.send(updatedActivity);
-    } catch ({ name, message }) {
-        next({ name, message });
-    }
+
 });
 
 module.exports = activitiesRouter
