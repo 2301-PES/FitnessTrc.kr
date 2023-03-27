@@ -8,13 +8,27 @@ const {JWT_SECRET} = process.env;
 apiRouter.use(async(req,res,next)=>{
     // console.log("This is the top of the routeHandler");
     const prefix='Bearer ';
-    const auth = req.header('Authorization');
+    let auth ="";
+    if(req.header("Authorization")){
+        auth = req.header("Authorization")
+    } 
+    if(req.header("authorization")){
+        auth = req.header('authorization');
+    }
+    if(req.user){
+        next();
+    }
+    else{
+
+    
+    console.log("This is the authorization: "+ auth);
 
     if(!auth){
         next();
     }else if(auth.startsWith(prefix)){
         console.log("TOP of else-if block");
         const token = auth.slice(prefix.length);
+        console.log("This is your token: " + token);
         // console.log(token);
         try {
             console.log("top of the try block");
@@ -37,6 +51,7 @@ apiRouter.use(async(req,res,next)=>{
             message: `Authorization token must start with ${prefix}`
         });
     }
+}
 });
 apiRouter.use((req,res,next) =>{
     if(req.user){

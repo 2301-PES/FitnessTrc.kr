@@ -15,8 +15,8 @@ const Login = (props) => {
     async function sendLoginRequest(e) {
         e.preventDefault();
         try {
-            // const response = await fetch("http://localhost:1337/api/users/login",
-                const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/users/login',
+            const response = await fetch("http://localhost:1337/api/users/login",
+                // const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/users/login',
                 {
                     method: "POST",
                     headers: {
@@ -38,9 +38,7 @@ const Login = (props) => {
                 console.log(translatedData);
                 alert('Login failed.');
             } else {
-                console.log(translatedData);
                 const myJWT = translatedData.token;
-                console.log(myJWT);
                 localStorage.setItem("token", myJWT);
                 setIsLoggedIn(!isLoggedIn);
                 navigate('/');
@@ -63,8 +61,8 @@ const Login = (props) => {
                 return;
             }
 
-            // const response = await fetch('http://localhost:1337/api/users/register',
-            const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/users/register',
+            const response = await fetch('http://localhost:1337/api/users/register',
+            // const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/users/register',
                 { 
                     method: 'POST',
                     headers: {
@@ -81,7 +79,7 @@ const Login = (props) => {
             )
 
             const translatedData = await response.json();
-                console.log(translatedData)
+                // console.log(translatedData)
             if (translatedData.error) {
                 alert('Account was not successfully created. Please try again.')
             } else {

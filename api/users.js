@@ -146,21 +146,20 @@ usersRouter.get('/me', requireUser, async(req,res,next)=>{
 
 //
 
-usersRouter.get('/:username/routines', async (req, res, next) => {
-    const { username } = req.params
-    const user = req.user;
+usersRouter.get('/:username/routines' ,async (req, res, next) => {
+    const { username } = req.params;
+    const user = await getUserByUsername(username);
+    
+    console.log(req.headers);
     console.log("This is the/username/routines route handler");
     console.log(user);
     try {
-      const userToken = req.headers.authorization.split(" ")[1];
-      const decryptedUserToken = jwt.verify(userToken, process.env.JWT_SECRET);
-      if (decryptedUserToken.username && user.username == decryptedUserToken.username){
-        const retrieveRoutines = await getAllRoutinesByUser(user);
-        res.send(retrieveRoutines)
-      } else if (decryptedUserToken.username && user.username != decryptedUserToken.username) {
-        const retrieveRoutines = await getPublicRoutinesByUser(user);
-        res.send(retrieveRoutines)
-      } else {
+
+        if(user){
+            const retrieveRoutines = await getAllRoutinesByUser(user);
+            res.send(retrieveRoutines)   
+        }
+      else {
         res.send({
             name: 'user not valid',
             message: 'Cannot get routines. User is not valid'

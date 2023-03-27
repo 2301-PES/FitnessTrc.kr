@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style.css';
-import { Header, Home, Routines, Activities, Login, MyRoutines, CreateNewRoutine, SingleRoutine } from "./components";
+import { Header, Home, Routines, Activities, Login, MyRoutines, CreateNewRoutine, SingleRoutine, CreateNewActivity } from "./components";
 
 const appElement = document.getElementById("app")
 
@@ -22,6 +22,8 @@ const App = () => {
             <Route path='/myroutines' element={<MyRoutines isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}/>
             <Route path='/createnewroutine' element={<CreateNewRoutine isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}/>
             <Route path='/:id' element={<SingleRoutine isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}/>
+            <Route path='/createnewactivity' element={<CreateNewActivity isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}/>
+
         </Routes> 
     </div>
     </BrowserRouter> 

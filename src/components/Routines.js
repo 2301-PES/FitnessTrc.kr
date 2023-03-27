@@ -11,8 +11,8 @@ const AllRoutines = (props) => {
         
         
         try {
-            // const response = await fetch (`http://localhost:1337/api/routines`,{
-            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
+            const response = await fetch (`http://localhost:1337/api/routines`,{
+            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -35,14 +35,14 @@ const AllRoutines = (props) => {
                     <div className="routines" key={routine.id}>
                         <p className="routineName">Name: {routine.name}</p>
                         <p className="routineDescription">Goal: {routine.goal}</p>
-                        <p className="routineDescription">Creator Name: {routine.creatorName}</p>
+                        {/* <p className="routineDescription">Creator Name: {routine.creatorName}</p> */}
                         <div className="activitiesInRoutineList">List of activities: {routine.activities.map((activity) => {
                             return (
                             <div className="routines" key={activity.id}>
                                 <p className="activityInRoutine"> Activity name: {activity.name} </p>
                             </div>)
                         })}</div>
-                        <p className="routineCount">Count: {routine.count}</p>
+                        {/* <p className="routineCount">Count: {routine.count}</p> */}
                         <Link className="routineLink" to={`/${routine.id}`}>Open this routine</Link>
                     </div>
                 )
