@@ -27,8 +27,8 @@ const MyRoutines = (props) => {
         
         const tokenKey = localStorage.getItem("token");
         try {
-            const response = await fetch(`http://localhost:1337/api/users/me`, {
-            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/me`, {
+            // const response = await fetch(`http://localhost:1337/api/users/me`, {
+            const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/users/me`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${tokenKey}`
@@ -48,8 +48,8 @@ const MyRoutines = (props) => {
     async function fetchMyRoutines(username) {
         try {
             // console.log(username);
-          const response = await fetch(`http://localhost:1337/api/users/${username}/routines`,{
-        //   const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/${id}/routines`, {
+        //   const response = await fetch(`http://localhost:1337/api/users/${username}/routines`,{
+          const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/users/${username}/routines`, {
             headers: {
               'Content-Type': 'application/json',
             }
@@ -67,8 +67,8 @@ const MyRoutines = (props) => {
 
     async function deleteRoutine(event) {
         try {
-            const response = await fetch(`http://localhost:1337/api/routines/${event.target.value}`,
-            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines/${event.target.value}`,
+            // const response = await fetch(`http://localhost:1337/api/routines/${event.target.value}`,
+            const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/routines/${event.target.value}`,
             {
                 method: "DELETE",
                 headers: {
