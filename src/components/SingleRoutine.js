@@ -7,29 +7,30 @@ const SingleRoutine = (props) => {
     const [ currentRoutine, setCurrentRoutine ] = useState({})
     const [activities, setActivities] = useState([]);
     const {id} = useParams();
-    useEffect(() => {
-        async function fetchCurrentRoutine() {
-            try {
-                // const response = await fetch(`http://localhost:1337/api/routines`,{
-                const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                const result = await response.json();
-                const desiredResult = result.filter ((routine) => {
-                    return routine.id == id
-                })
-                setCurrentRoutine(desiredResult[0] || {});
-            } catch (e) {
-                console.log(e);
-            }
+    async function fetchCurrentRoutine() {
+        try {
+            const response = await fetch(`http://localhost:1337/api/routines`,{
+            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            const result = await response.json();
+            const desiredResult = result.filter ((routine) => {
+                return routine.id == id
+            })
+            setCurrentRoutine(desiredResult[0] || {});
+        } catch (e) {
+            console.log(e);
         }
+    }
+    useEffect(() => {
+        
         
         async function fetchActivities() {
             try {
-                // const response = await fetch(`http://localhost:1337/api/activities`,{
-              const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/activities`, {
+                const response = await fetch(`http://localhost:1337/api/activities`,{
+            //   const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/activities`, {
                 headers: {
                   'Content-Type': 'application/json',
                 }
@@ -61,8 +62,8 @@ const SingleRoutine = (props) => {
 
         async function fetchMyData() {
             try {
-                // const response = await fetch(`http://localhost:1337/api/users/me`,{
-                const response = await fetch("https://fitnesstrac-kr.herokuapp.com/api/users/me", {
+                const response = await fetch(`http://localhost:1337/api/users/me`,{
+                // const response = await fetch("https://fitnesstrac-kr.herokuapp.com/api/users/me", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -87,8 +88,8 @@ const SingleRoutine = (props) => {
 
         try {
             const response = await fetch(
-                // `http://localhost:1337/api/routines/${id}`,
-                `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}`,
+                `http://localhost:1337/api/routines/${id}`,
+                // `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -127,8 +128,8 @@ const SingleRoutine = (props) => {
 
         try {
             const response = await fetch(
-                // `http://localhost:1337/api/routines/${id}/activities`,
-                `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}/activities`,
+                `http://localhost:1337/api/routines/${id}/activities`,
+                // `https://fitnesstrac-kr.herokuapp.com/api/routines/${id}/activities`,
                 {
                     method: "POST",
                     headers: {
@@ -144,6 +145,12 @@ const SingleRoutine = (props) => {
     
             const data = await response.json();
             console.log(data)
+            setCurrentRoutine(fetchCurrentRoutine());
+            // if(data){
+            //     let filteredData = data.filter((singleData)=>{
+
+            //     })
+            // }
             // setCurrentRoutine(currentRoutine + currentRoutine.data);
             // setEditName(data.name);
             // setEditGoal(data.goal);
@@ -164,9 +171,20 @@ const SingleRoutine = (props) => {
                     <p className="routineGoal">Goal: {currentRoutine.goal}</p>
                     <p className="routineIsPublic">Is Public? {currentRoutine.isPublic ? 'Yes' : 'No'}</p>
                     {currentRoutine.activities ? (
-                        <p className="routineActivities">
-                            Activities: {currentRoutine.activities.map(activity => "Name: " + activity.name + " Duration: " + activity.duration + " Count: " + activity.count + " Description: " +   activity.description).join(", ")}
-                        </p>
+                        // <p className="routineActivities">
+                        //     Activities: {currentRoutine.activities.map(activity => "Name: " + activity.name +"Duration: " + activity.duration + " Count: " + activity.count + " Description: " +   activity.description).join(", ")}
+                        // </p>
+                        <div className="routineActivities">
+                            Activities: {currentRoutine.activities.map(activity =>
+                                <div key={activity.id}>
+                                    Name: {activity.name} <br />
+                                    Duration: {activity.duration} <br />
+                                    Count: {activity.count} <br />
+                                    Description: {activity.description}
+                                    <p></p>
+                                </div>
+                            )}
+                        </div>
                     ) : (
                         <p>No activities yet</p>
                     )}

@@ -6,3 +6,4 @@ export { default as Login } from './Login';
 export { default as MyRoutines } from './MyRoutines';
 export { default as CreateNewRoutine } from './CreateNewRoutine';
 export { default as SingleRoutine } from './SingleRoutine';
+export { default as CreateNewActivity} from './CreateNewActivity';

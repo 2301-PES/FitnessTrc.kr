@@ -15,6 +15,7 @@ const MyRoutines = (props) => {
         if (localStorage.getItem("token")) {
             props.setIsLoggedIn(true);
             fetchMyUserData();
+            // fetchMyRoutines();
         } else {
             props.setIsLoggedIn(false);
             console.log("No token exist");
@@ -25,19 +26,18 @@ const MyRoutines = (props) => {
     const fetchMyUserData = async () => {
         
         const tokenKey = localStorage.getItem("token");
-
         try {
-            // const response = await fetch(`http://localhost:1337/api/users/me`, {
-            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/me`, {
+            const response = await fetch(`http://localhost:1337/api/users/me`, {
+            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/me`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${tokenKey}`
                   },
                 });
                 const result = await response.json();
-                console.log("this is line 41 result:  " +JSON.stringify(result));
+                // console.log("this is line 38 result:  " +JSON.stringify(result));
                 setMyId(result.id);
-                fetchMyRoutines(result.id);
+                fetchMyRoutines(result.username);
 
         }catch(error){
             console.log(error);
@@ -45,15 +45,18 @@ const MyRoutines = (props) => {
     }
 
 
-    async function fetchMyRoutines(id) {
+    async function fetchMyRoutines(username) {
         try {
-        //   const response = await fetch(`http://localhost:1337/api/users/${id}/routines`,{
-          const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/${id}/routines`, {
+            // console.log(username);
+          const response = await fetch(`http://localhost:1337/api/users/${username}/routines`,{
+        //   const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/${id}/routines`, {
             headers: {
               'Content-Type': 'application/json',
             }
           });
           const result = await response.json();
+        //   console.log("This is the console.log on line 58");
+        //   console.log(result);
           setMyRoutines(result);
         } catch (e) {
           console.log(e);
@@ -64,8 +67,8 @@ const MyRoutines = (props) => {
 
     async function deleteRoutine(event) {
         try {
-            // const response = await fetch (`http://localhost:1337/api/routines/${event.target.value}`,
-            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines/${event.target.value}`,
+            const response = await fetch(`http://localhost:1337/api/routines/${event.target.value}`,
+            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines/${event.target.value}`,
             {
                 method: "DELETE",
                 headers: {
@@ -78,14 +81,15 @@ const MyRoutines = (props) => {
 
             console.log(translatedResponse)
 
-            if (translatedResponse.success) {
+            if (translatedResponse) {
                 let filteredMyRoutines = myRoutines.filter((individualRoutine) => {
-                    if (individualRoutine.id != event.target.value) {
+                    if (individualRoutine.id != translatedResponse.id) {
                         return individualRoutine
                     }
                 })
+                setMyRoutines(filteredMyRoutines);
 
-                myRoutines = filteredMyRoutines
+                // myRoutines = filteredMyRoutines
             }
         
         } catch (error) {
@@ -96,20 +100,22 @@ const MyRoutines = (props) => {
     return (
         <div className="singleRoutine">
             <Link className="routineLink"to='/createnewroutine'>Click here to create a new routine</Link>
-            <div>
-                {
-                    !myRoutines.length ?<div>No routines yet. Please create a routine</div> : myRoutines.map((singleRoutine,index)=>{
-                        return(
-                            <div key={index +1}>
-                                <p>{index+1}. {singleRoutine.name}</p>
-                                <p>{singleRoutine.creatorName}</p>
-                                <p>{singleRoutine.goal}</p>
-                                <button value={singleRoutine.id} onClick={deleteRoutine} type='submit' > Delete this routine</button>
-                            </div>
-                        )
-                    })
-                }
-            </div>
+            {/* <div> */}
+                <div>
+                    {
+                        !myRoutines.length ?<div>No routines yet. Please create a routine</div> : myRoutines.map((singleRoutine,index)=>{
+                            return(
+                                <div key={index +1}>
+                                    <p>{index+1}. {singleRoutine.name}</p>
+                                    <p>{singleRoutine.creatorName}</p>
+                                    <p>{singleRoutine.goal}</p>
+                                    <button value={singleRoutine.id} onClick={deleteRoutine} type='submit' > Delete this routine</button>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            {/* </div> */}
         </div>
     )
 }
