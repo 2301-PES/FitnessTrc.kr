@@ -12,8 +12,8 @@ const CreateNewRoutine = () => {
         e.preventDefault();
         try {
 
-            const response = await fetch (`http://localhost:1337/api/routines`,
-            // const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/routines',
+            // const response = await fetch (`http://localhost:1337/api/routines`,
+            const response = await fetch('https://fitnesstrac-kr.herokuapp.com/api/routines',
                 { 
                     method: 'POST',
                     headers: {
@@ -46,7 +46,7 @@ const CreateNewRoutine = () => {
     }
 
     return(
-        <form>
+        <form className="routineCreateForm">
             <input type='text' placeholder="New routine name" onChange={(event) => {setRoutineName(event.target.value)}}></input>
             <input type='text' placeholder="New routine goal" onChange={(event) => {setRoutineGoal(event.target.value)}}></input>
             <label> Is Public?
