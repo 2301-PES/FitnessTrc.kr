@@ -27,8 +27,8 @@ const MyRoutines = (props) => {
         const tokenKey = localStorage.getItem("token");
 
         try {
-            const response = await fetch(`http://localhost:1337/api/users/me`, {
-            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/me`, {
+            // const response = await fetch(`http://localhost:1337/api/users/me`, {
+            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/me`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${tokenKey}`
@@ -47,8 +47,8 @@ const MyRoutines = (props) => {
 
     async function fetchMyRoutines(id) {
         try {
-          const response = await fetch(`http://localhost:1337/api/users/${id}/routines`,{
-        //   const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/${id}/routines`, {
+        //   const response = await fetch(`http://localhost:1337/api/users/${id}/routines`,{
+          const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/users/${id}/routines`, {
             headers: {
               'Content-Type': 'application/json',
             }
@@ -64,8 +64,8 @@ const MyRoutines = (props) => {
 
     async function deleteRoutine(event) {
         try {
-            const response = await fetch (`http://localhost:1337/api/routines/${event.target.value}`,
-            // const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines/${event.target.value}`,
+            // const response = await fetch (`http://localhost:1337/api/routines/${event.target.value}`,
+            const response = await fetch(`https://fitnesstrac-kr.herokuapp.com/api/routines/${event.target.value}`,
             {
                 method: "DELETE",
                 headers: {
@@ -94,8 +94,8 @@ const MyRoutines = (props) => {
     }
 
     return (
-        <div>
-            <Link to='/createnewroutine'>Click here to create a new routine</Link>
+        <div className="singleRoutine">
+            <Link className="routineLink"to='/createnewroutine'>Click here to create a new routine</Link>
             <div>
                 {
                     !myRoutines.length ?<div>No routines yet. Please create a routine</div> : myRoutines.map((singleRoutine,index)=>{

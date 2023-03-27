@@ -156,8 +156,13 @@ body {
 }
 .activityLink {
     display: flexbox;
-    -webkit-text-fill-color: white;
+    -webkit-text-fill-color: blue;
     text-decoration-line: none;
+}
+#activity-dropdown {
+    display: flex;
+    padding-bottom: 1%;
+    height: min-content;
 }
 
 /* routines styling */
@@ -173,12 +178,40 @@ body {
 .routineName {
     display:flexbox;
     background-color: #ccc;
+    padding: .3%;
+    width: max-content;
 }
 
 .routineLink {
     display: flexbox;
     -webkit-text-fill-color: blue;
     text-decoration-line: none;
+}
+
+.routineCreateForm {
+    display: flexbox;
+    background-color: #9ca39c;
+    height:max-content;
+    padding: 2.6%;
+}
+
+.singleRoutine {
+    display: flex;
+    background-color: #9ca39c;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 1.3%;
+}
+
+.singleRoutineList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: .3%;
+}
+.singleRoutineLink {
+    display: flex;
+    background-color: #9ca39c;
 }
 
 .activitiesInRoutineList {
