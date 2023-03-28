@@ -11,8 +11,8 @@ const AllRoutines = (props) => {
         
         
         try {
-            const response = await fetch(`${process.env.DATABASE_URL}/api/routines`,{
-            // const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/routines`, {
+            // const response = await fetch(`${process.env.DATABASE_URL}/api/routines`,{
+            const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/routines`, {
                 headers: {
                     'Content-Type': 'application/json',
                 }

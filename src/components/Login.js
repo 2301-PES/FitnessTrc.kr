@@ -17,8 +17,8 @@ const Login = (props) => {
         e.preventDefault();
         try {
             // const response = await fetch("http://localhost:1337/api/users/login",
-            const response = await fetch(`${process.env.DATABASE_URL}/api/users/login`,
-                // const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/users/login',
+            // const response = await fetch(`${process.env.DATABASE_URL}/api/users/login`,
+                const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/users/login',
                 {
                     method: "POST",
                     headers: {
@@ -63,8 +63,8 @@ const Login = (props) => {
                 return;
             }
 
-            const response = await fetch(`${process.env.DATABASE_URL}/api/users/register`,
-            // const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/users/register',
+            // const response = await fetch(`${process.env.DATABASE_URL}/api/users/register`,
+            const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/users/register',
                 { 
                     method: 'POST',
                     headers: {
