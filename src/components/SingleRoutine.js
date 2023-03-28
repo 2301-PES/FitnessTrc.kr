@@ -9,8 +9,8 @@ const SingleRoutine = (props) => {
     const {id} = useParams();
     async function fetchCurrentRoutine() {
         try {
-            const response = await fetch(`${process.env.DATABASE_URL}/api/routines`, {
-            // const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/routines`, {
+            // const response = await fetch(`${process.env.DATABASE_URL}/api/routines`, {
+            const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/routines`, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -29,8 +29,8 @@ const SingleRoutine = (props) => {
         
         async function fetchActivities() {
             try {
-                const response = await fetch(`${process.env.DATABASE_URL}/api/activities`, {
-            //   const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/activities`, {
+                // const response = await fetch(`${process.env.DATABASE_URL}/api/activities`, {
+              const response = await fetch(`https://fitnesstrac-kr-pes.onrender.com/api/activities`, {
                 headers: {
                   'Content-Type': 'application/json',
                 }
@@ -62,8 +62,8 @@ const SingleRoutine = (props) => {
 
         async function fetchMyData() {
             try {
-                const response = await fetch(`${process.env.DATABASE_URL}/api/users/me`,{
-                // const response = await fetch("https://fitnesstrac-kr-pes.onrender.com/api/users/me", {
+                // const response = await fetch(`${process.env.DATABASE_URL}/api/users/me`,{
+                const response = await fetch("https://fitnesstrac-kr-pes.onrender.com/api/users/me", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -88,8 +88,8 @@ const SingleRoutine = (props) => {
 
         try {
             const response = await fetch(
-                `${process.env.DATABASE_URL}/api/routines/${id}`,
-                // `https://fitnesstrac-kr-pes.onrender.com/api/routines/${id}`,
+                // `${process.env.DATABASE_URL}/api/routines/${id}`,
+                `https://fitnesstrac-kr-pes.onrender.com/api/routines/${id}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -128,8 +128,8 @@ const SingleRoutine = (props) => {
 
         try {
             const response = await fetch(
-                `${process.env.DATABASE_URL}/api/routines/${id}/activities`,
-                // `https://fitnesstrac-kr-pes.onrender.com/api/routines/${id}/activities`,
+                // `${process.env.DATABASE_URL}/api/routines/${id}/activities`,
+                `https://fitnesstrac-kr-pes.onrender.com/api/routines/${id}/activities`,
                 {
                     method: "POST",
                     headers: {

@@ -12,8 +12,8 @@ const CreateNewActivity = () => {
         e.preventDefault();
         try {
 
-            const response = await fetch(`${process.env.DATABASE_URL}/api/activities`,
-            // const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/activities',
+            // const response = await fetch(`${process.env.DATABASE_URL}/api/activities`,
+            const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/activities',
                 { 
                     method: 'POST',
                     headers: {
