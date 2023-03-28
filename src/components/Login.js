@@ -18,7 +18,7 @@ const Login = (props) => {
         try {
             // const response = await fetch("http://localhost:1337/api/users/login",
             // const response = await fetch(`${process.env.DATABASE_URL}/api/users/login`,
-                const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/users/login',
+                const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/users/login', 
                 {
                     method: "POST",
                     headers: {
@@ -62,7 +62,6 @@ const Login = (props) => {
                 alert('Username is too short. Must be 8 characters.');
                 return;
             }
-
             // const response = await fetch(`${process.env.DATABASE_URL}/api/users/register`,
             const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/users/register',
                 { 
