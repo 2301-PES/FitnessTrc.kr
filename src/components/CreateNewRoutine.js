@@ -12,8 +12,8 @@ const CreateNewRoutine = () => {
         e.preventDefault();
         try {
 
-            // const response = await fetch (`http://localhost:1337/api/routines`,
-            const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/routines',
+            const response = await fetch(`${process.env.DATABASE_URL}/api/routines`,
+            // const response = await fetch('https://fitnesstrac-kr-pes.onrender.com/api/routines',
                 { 
                     method: 'POST',
                     headers: {
