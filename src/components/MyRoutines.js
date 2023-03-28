@@ -24,7 +24,6 @@ const MyRoutines = (props) => {
 
     
     const fetchMyUserData = async () => {
-        
         const tokenKey = localStorage.getItem("token");
         try {
             // const response = await fetch(`${process.env.DATABASE_URL}/api/users/me`, {
